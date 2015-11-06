@@ -6,7 +6,7 @@ import subprocess
 import re
 
 ### Output ###
-#Node	   RUT	CPU(%)				Mem(%)
+#Node	   RUT	CPU(%)              Mem(%)
 #node1	0/0/24	    24 [##        ]    	 8 [#         ]
 
 
@@ -55,9 +55,9 @@ class Node:
 #[jhan@cm35 scripts]$ qstat -f
 #queuename                      qtype resv/used/tot. load_avg arch          states
 #---------------------------------------------------------------------------------
-#QUENAME.q@node1                BIP   0/1/24         1.50     lx24-amd64
+#QNAME.q@node1                  BIP   0/1/24         1.50     lx24-amd64
 #---------------------------------------------------------------------------------
-#QUENAME.q@node2                BIP   0/0/24         0.19     lx24-amd64
+#QNAME.q@node2                  BIP   0/0/24         0.19     lx24-amd64
 #---------------------------------------------------------------------------------
 #
 # Get NodeName, resv/used/tot
