@@ -65,11 +65,16 @@ def getQSTAT():
     dQSTAT = {}
     qstat  = subprocess.check_output(["qstat","-f"])
     lqstat = qstat.split('\n')
-    for i in range(2,len(lqstat),2):
-	sNode = (re.split(" +",lqstat[i])[0]).split("@")[1]
-	sResvUsedTot = re.split(" +",lqstat[i])[2]
-	dQSTAT[sNode] = sResvUsedTot
-    #end1: for i
+    try:
+    	for i in range(2,len(lqstat),2):
+		if lqstat[i][0] not in ['0','1','2','3','4','5','6','7','8','9','-']:
+			sNode = (re.split(" +",lqstat[i])[0]).split("@")[1]
+			sResvUsedTot = re.split(" +",lqstat[i])[2]
+			dQSTAT[sNode] = sResvUsedTot
+		#end3: if lqstat[i][0]
+    	#end2: for i
+    except IndexError:
+    	pass
     return dQSTAT
 #end: def getQSTAT
 
@@ -79,7 +84,12 @@ def getQSTAT():
 #HOSTNAME                ARCH         NCPU  LOAD  MEMTOT  MEMUSE  SWAPTO  SWAPUS
 #-------------------------------------------------------------------------------
 #node1                   lx24-amd64     xx  0.03   x.xG    x.xG   xx.xG   xx.xK
+#-------------------------------------------------------------------------------
 #node2                   lx24-amd64     xx  0.00   x.xG    x.xG   xx.xG   xx.xK
+#1234567 0.12345 xxxx xxxx r xx/xx/xxxx xx:xx:xx xx
+#1234568 0.12345 xxxx xxxx r xx/xx/xxxx xx:xx:xx xx
+#1234569 0.12345 xxxx xxxx r xx/xx/xxxx xx:xx:xx xx
+#-------------------------------------------------------------------------------
 # ...
 #nodeN                   lx24-amd64     xx  0.04   xxxG   xxxxM   xx.xG   xx.xM
 # Get NodeName, NCPU, LOAD, MEMTOT, MEMUSE
